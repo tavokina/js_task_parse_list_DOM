@@ -1,24 +1,26 @@
 'use strict';
 
+function convertString(str) {
+  return Number(str.replace('$', ''));
+}
+
 const list = document.querySelector('ul');
 
-function sortList() {
-  const employees = [...list.children];
+function sortList(listElement) {
+  const employees = [...listElement.children];
 
   employees.sort(
-    (a, b) =>
-      Number(b.dataset.salary.replace('$', '')) -
-      Number(a.dataset.salary.replace('$', '')),
+    (a, b) => convertString(b.dataset.salary) - convertString(a.dataset.salary),
   );
 
   employees.forEach((employee) => list.append(employee));
 }
 
-function getEmployees() {
-  return [...list.children].map((employee) => ({
+function getEmployees(listElement) {
+  return [...listElement.children].map((employee) => ({
     name: employee.textContent.trim(),
     position: employee.dataset.position,
-    salary: Number(employee.dataset.salary.replace('$', '')),
+    salary: convertString(employee.dataset.salary),
     age: employee.dataset.age,
   }));
 }
