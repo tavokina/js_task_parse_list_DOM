@@ -13,7 +13,7 @@ function sortList(listElement) {
     (a, b) => convertString(b.dataset.salary) - convertString(a.dataset.salary),
   );
 
-  employees.forEach((employee) => list.append(employee));
+  employees.forEach((employee) => listElement.append(employee));
 }
 
 function getEmployees(listElement) {
